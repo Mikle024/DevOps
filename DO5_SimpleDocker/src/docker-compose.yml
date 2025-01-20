@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  fastcgi_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: onionyas_fcgi
+    networks:
+      - internal_network
+
+  nginx_proxy:
+    image: nginx:latest
+    container_name: onionyas_nginx
+    networks:
+      - internal_network
+    ports:
+      - "80:8080"
+    volumes:
+      - ./part6/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - fastcgi_server
+    command: ["nginx", "-g", "daemon off;"]
+    extra_hosts:
+      - "localhost:host-gateway"
+
+networks:
+  internal_network:
+    driver: bridge
