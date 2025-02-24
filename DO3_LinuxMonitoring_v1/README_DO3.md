@@ -53,6 +53,9 @@ bash src/02/main.sh
 ```bash
 bash src/03/main.sh <background_color> <text_color> <value_background_color> <value_text_color>
 ```
+*Available colors*:
+
+**1 - white, 2 - red, 3 - green, 4 - blue, 5 - purple, 6 - black**.
 
 **Пример:**
 ```bash
@@ -64,8 +67,22 @@ bash src/03/main.sh 1 3 4 5
 ## Part 4: Конфигурирование визуального оформления
 
 **Описание:**  
-Скрипт берет настройки цветов из конфигурационного файла.  
+Скрипт берет настройки цветов из конфигурационного файла [config.conf](src%2F04%2Fconfig.conf).  
 При отсутствии файла используются настройки по умолчанию.
+
+*Available colors*:
+
+**1 - white, 2 - red, 3 - green, 4 - blue, 5 - purple, 6 - black**.
+
+*Default colors*:
+
+**column1_background - black,**
+
+**column1_font_color - white,**
+
+**column2_background - black,**
+
+**column2_font_color - blue**.
 
 **Использование:**
 ```bash
@@ -89,11 +106,5 @@ bash src/05/main.sh <directory_path/>
 
 ---
 
-## Системные требования
-- Операционная система: Ubuntu Server 20.04 LTS
-- bash 5.0+
-
----
-
-## Заключение
-
+## Системные требования:
+- ОС: Ubuntu Server 20.04 LTS
