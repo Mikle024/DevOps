@@ -17,6 +17,7 @@
 ---
 
 ## Part 1: Проба пера
+[Директория со скриптом.](src%2F01)
 
 **Описание:**  
 Скрипт запускается с одним текстовым параметром. Выводит значение параметра.  
@@ -24,12 +25,13 @@
 
 **Использование:**  
 ```bash
-bash src/01/main.sh <string>
+bash main.sh <string>
 ```
 
 ---
 
 ## Part 2: Исследование системы
+[Директория со скриптом.](src%2F02)
 
 **Описание:**  
 Скрипт выводит системную информацию:
@@ -38,12 +40,13 @@ bash src/01/main.sh <string>
 
 **Использование:**
 ```bash
-bash src/02/main.sh
+bash main.sh
 ```
 
 ---
 
 ## Part 3: Визуальное оформление вывода
+[Директория со скриптом.](src%2F03)
 
 **Описание:**  
 Скрипт улучшает визуальное представление данных из [Part 2](#part-2-исследование-системы).  
@@ -51,7 +54,7 @@ bash src/02/main.sh
 
 **Использование:**
 ```bash
-bash src/03/main.sh <background_color> <text_color> <value_background_color> <value_text_color>
+bash main.sh <background_color> <text_color> <value_background_color> <value_text_color>
 ```
 *Available colors*:
 
@@ -59,12 +62,13 @@ bash src/03/main.sh <background_color> <text_color> <value_background_color> <va
 
 **Пример:**
 ```bash
-bash src/03/main.sh 1 3 4 5
+bash main.sh 1 3 4 5
 ```
 
 ---
 
 ## Part 4: Конфигурирование визуального оформления
+[Директория со скриптом.](src%2F04)
 
 **Описание:**  
 Скрипт берет настройки цветов из конфигурационного файла [config.conf](src%2F04%2Fconfig.conf).  
@@ -86,12 +90,13 @@ bash src/03/main.sh 1 3 4 5
 
 **Использование:**
 ```bash
-bash src/04/main.sh
+bash main.sh
 ```
 
 ---
 
 ## Part 5: Исследование файловой системы
+[Директория со скриптом.](src%2F05)
 
 **Описание:**  
 Скрипт принимает абсолютный путь к директории и анализирует ее содержимое:
@@ -101,7 +106,7 @@ bash src/04/main.sh
 
 **Использование:**
 ```bash
-bash src/05/main.sh <directory_path/>
+bash main.sh <directory_path/>
 ```
 
 ---
