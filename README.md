@@ -1,5 +1,8 @@
 # **DevOps**
 
+[![CI](https://github.com/Mikle024/DevOps/actions/workflows/ci.yml/badge.svg)](https://github.com/Mikle024/DevOps/actions/workflows/ci.yml)
+
+
 *Tasks in the DevOps branch.* <img src="materials/images/heart_21_x10.gif" alt="drawing" width="20" height="20"/>
 
 ![devops.png](materials/images/devops.png)
