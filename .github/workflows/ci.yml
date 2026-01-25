@@ -1,0 +1,88 @@
+name: CI/CD
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main", "develop"]
+
+jobs:
+  build_job:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create artifacts directory
+        run: mkdir -p DO6_CICD/artifacts
+
+      - name: Build s21_cat
+        run: |
+          cd DO6_CICD/src/cat
+          make clean
+          make s21_cat
+
+      - name: Build s21_grep
+        run: |
+          cd DO6_CICD/src/grep
+          make clean
+          make s21_grep
+
+      - name: Copy binaries to artifacts
+        run: |
+          cp DO6_CICD/src/cat/s21_cat DO6_CICD/src/grep/s21_grep DO6_CICD/artifacts/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: s21_builds
+          path: DO6_CICD/artifacts/
+          retention-days: 30
+
+  clang_format_job:
+    name: Code Style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install clang-format
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format
+
+      - name: Check code style
+        run: |
+          cp DO6_CICD/materials/linters/.clang-format DO6_CICD/src/cat/
+          cp DO6_CICD/materials/linters/.clang-format DO6_CICD/src/grep/
+          echo "Running clang-format check..."
+          if clang-format -n --Werror --verbose DO6_CICD/src/cat/*.c DO6_CICD/src/grep/*.c; then
+            echo "Clang-format check passed."
+          else
+            echo "clang-format check failed."
+            exit 1
+          fi
+
+  integration_test_job:
+    name: Integration Tests
+    needs: [build_job, clang_format_job]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Run integration tests for s21_cat
+        run: |
+          echo "Running integration tests for s21_cat..."
+          cd DO6_CICD/src/cat
+          make test || { echo "Integration tests for s21_cat failed."; exit 1; }
+
+      - name: Run integration tests for s21_grep
+        run: |
+          echo "Running integration tests for s21_grep..."
+          cd DO6_CICD/src/grep
+          make test || { echo "Integration tests for s21_grep failed."; exit 1; }
+
+      - name: Success message
+        run: echo "All integration tests passed successfully."
