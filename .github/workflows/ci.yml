@@ -83,7 +83,6 @@ jobs:
         run: |
           chmod +x DO6_CICD/artifacts/s21_cat
           chmod +x DO6_CICD/artifacts/s21_grep
-          # Копируем артефакты в папки исходников, где их ждут тесты
           cp DO6_CICD/artifacts/s21_cat DO6_CICD/src/cat/
           cp DO6_CICD/artifacts/s21_grep DO6_CICD/src/grep/
 
@@ -101,51 +100,3 @@ jobs:
 
       - name: Success message
         run: echo "All integration tests passed successfully."
-
-  deploy_job:
-    name: Deploy
-    stage: deploy
-    needs: integration_test_job
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy to Remote Server
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-        run: |
-            echo "Deploying to the second virtual machine..."
-            # Создаем приватный ключ
-            mkdir -p ~/.ssh
-            echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            ssh-keyscan -H $REMOTE_HOST >> ~/.ssh/known_hosts
-            
-            # Запускаем скрипт деплоя (предполагаем, что он адаптирован для работы с аргументами или ENV)
-            # Если скрипт требует интерактивности или специфичен для GitLab, его нужно адаптировать
-            # Здесь просто пример запуска
-            chmod +x DO6_CICD/src/deploy_to_second_vm.sh
-            bash DO6_CICD/src/deploy_to_second_vm.sh
-
-  notify_job:
-    name: Notify
-    needs: [build_job, clang_format_job, integration_test_job, deploy_job]
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Send Telegram Notification
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          CI_JOB_STATUS: ${{ job.status }}
-        run: |
-          echo "Sending notification to Telegram..."
-          chmod +x DO6_CICD/src/telegram_notify.sh
-          bash DO6_CICD/src/telegram_notify.sh
