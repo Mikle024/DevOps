@@ -16,45 +16,6 @@
 
 - `goaccess *.log --log-format=COMBINED -o report.html --real-time-html`. Флаг `--real-time-html` обеспечивает обновление данных.
 
-<style>
-  details {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    transition: all 0.3s ease;
-    margin-bottom: 10px;
-    font-family: sans-serif;
-  }
-
-  summary {
-    font-weight: bold;
-    cursor: pointer; /* Показывает, что кликабельно */
-    list-style: none; /* Убирает стандартный треугольник */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
-  }
-
-  summary::after {
-    content: '+';
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-
-  details[open] summary::after {
-    content: '−';
-  }
-
-  details[open] summary {
-    margin-bottom: 10px;
-    color: #007bff;
-  }
-</style>
-
 <details>
 <summary>Утилита Socket Statistics</summary>
 
