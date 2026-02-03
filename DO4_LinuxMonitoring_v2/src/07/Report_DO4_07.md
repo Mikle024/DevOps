@@ -71,45 +71,6 @@ cd prometheus-3.8.0-rc.1.linux-amd64/
 
 https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
 
-<style>
-  details {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    transition: all 0.3s ease;
-    margin-bottom: 10px;
-    font-family: sans-serif;
-  }
-
-  summary {
-    font-weight: bold;
-    cursor: pointer; /* Показывает, что кликабельно */
-    list-style: none; /* Убирает стандартный треугольник */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
-  }
-
-  summary::after {
-    content: '+';
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-
-  details[open] summary::after {
-    content: '−';
-  }
-
-  details[open] summary {
-    margin-bottom: 10px;
-    color: #007bff;
-  }
-</style>
-
 <details>
   <summary>Установка grafana через прокси vpn хоста. Нажмите, чтобы развернуть...</summary>
   <p>
