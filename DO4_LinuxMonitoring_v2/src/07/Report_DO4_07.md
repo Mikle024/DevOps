@@ -51,7 +51,7 @@ cd prometheus-3.8.0-rc.1.linux-amd64/
       - targets: ["localhost:9100"]
 ````
 
- - Запуск **prometheus** с освобождением терминала `./prometheus > /dev/null 2>&1 &`
+- Запуск **prometheus** с освобождением терминала `./prometheus > /dev/null 2>&1 &`
 
 > Успешный запуск **node_exporter** на порту `9100` и **prometheus** на `9090` :
 >
@@ -67,7 +67,7 @@ cd prometheus-3.8.0-rc.1.linux-amd64/
 
 ## Установка, запуск и настройка сервиса grafana:
 
-**Актуальные версии grafana и инструкция по установке:** 
+**Актуальные версии grafana и инструкция по установке:**
 
 https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
 
@@ -75,11 +75,11 @@ https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
   <summary>Установка grafana через прокси vpn хоста. Нажмите, чтобы развернуть...</summary>
   <p>
 
-  - На хосте необходимо включить **VPN** с функцией **"Allow Connection from LAN"**
+- На хосте необходимо включить **VPN** с функцией **"Allow Connection from LAN"**
 
-  - Создаем конфигурационный файл пакетного менеджера APT `/etc/apt/apt.conf.d/80proxy`, указывающий использовать прокси-сервер для загрузки обновлений и пакетов.
+- Создаем конфигурационный файл пакетного менеджера APT `/etc/apt/apt.conf.d/80proxy`, указывающий использовать прокси-сервер для загрузки обновлений и пакетов.
 
-  - В файл `/etc/apt/apt.conf.d/80proxy` задаем настройки индивидуального прокси исключительно для репозитория Grafana, не затрагивая остальные источники:
+- В файл `/etc/apt/apt.conf.d/80proxy` задаем настройки индивидуального прокси исключительно для репозитория Grafana, не затрагивая остальные источники:
 
   ```
   Acquire::https::Proxy::apt.grafana.com "http://IP_HOST:PORT_VPN/";
@@ -89,59 +89,59 @@ https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
 
   ```
 
-  - Установка необходимых пакетов **grafana**: 
+- Установка необходимых пакетов **grafana**:
 
   ```` bash
   sudo apt-get install -y apt-transport-https wget
   ````
 
-  - Создание директории для **GPG-ключа**
+- Создание директории для **GPG-ключа**
 
   ```` bash
   sudo mkdir -p /etc/apt/keyrings/
   ````
 
-  - Скачивание и добавление **GPG-ключа**, с параметром `https_proxy="http://IP_HOST:PORT_VPN"`
+- Скачивание и добавление **GPG-ключа**, с параметром `https_proxy="http://IP_HOST:PORT_VPN"`
 
   ```` bash
   sudo https_proxy="http://10.52.244.121:12334" wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
   # 10.52.244.121:12334 - пример ip хоста и порт vpn
   ````
 
-  - Добавление репозитория для стабильных main релизов:
+- Добавление репозитория для стабильных main релизов:
 
   ```` bash
   echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
   ````
 
-  - Добавление репозитория для beta main релизов:
+- Добавление репозитория для beta main релизов:
 
   ```` bash
   echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com beta main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
   ````
 
-  > Проверяем файл конфигурации репозитория /etc/apt/sources.list.d/grafana.list:
-  >
-  > ![screen_7_04.png](screen/screen_7_04.png)
-  >
+> Проверяем файл конфигурации репозитория /etc/apt/sources.list.d/grafana.list:
+>
+> ![screen_7_04.png](screen/screen_7_04.png)
+>
 
-  - Обновляем список доступных пакетов:
+- Обновляем список доступных пакетов:
 
   ```` bash
   sudo apt-get update
   ````
 
-  >
-  > ![screen_7_05.png](screen/screen_7_05.png)
-  >
+>
+> ![screen_7_05.png](screen/screen_7_05.png)
+>
 
-  - Установка Grafana OSS:
+- Установка Grafana OSS:
 
   ```` bash
   sudo apt-get install grafana
   ````
 
-  - Установка Grafana Enterprise: 
+- Установка Grafana Enterprise:
 
   ```` bash
   sudo apt-get install grafana-enterprise
@@ -175,7 +175,7 @@ sudo systemctl status grafana-server
 
 ## Создание и настройка дашборда grafana:
 
-1. **Зайти в интерфейс Grafana** по адресу `IPVM:3000` 
+1. **Зайти в интерфейс Grafana** по адресу `IPVM:3000`
 2. **Войти в лк** по `login/pass` *(по дефолту admin / admin)*.
 3. Добавить новый источник данных **Prometheus** во вкладке `Connections`.
 
@@ -186,6 +186,7 @@ sudo systemctl status grafana-server
 
 4. Перейти во вкладку `Dashboards`, затем `New` -> `New Dashboard`.
 5. Добавление окон с метриками -> **`Add visualization`**.
+6. `Select data source` -> `prometheus`
 
 - Добавляем выборки метрик с помощью [PromQL](https://timeweb.com/ru/blog/authors/mironov-styopa/articles/chto-takoe-promql-i-kak-s-nim-rabotat/).
 
@@ -202,18 +203,18 @@ sudo systemctl status grafana-server
 <details>
   <summary>Разбор PromQL запроса</summary>
 
-  1. `node_cpu_seconds_total{mode="idle"}`: выбираем метрику времени, которое процессор провел в режиме бездействия (idle).
-  2. `rate(...[1m])`: вычисляем среднюю скорость изменения метрики за последнюю 1 минуту. Доля времени бездействия (от 0 до 1).
-  3. `avg by (cpu) (...)`: агрегируем данные, высчитывая среднее значение в разрезе каждого ядра (label cpu).
-  4. `* 100`: переводим долю в проценты.
-  5. `100 - ...`: вычитаем процент бездействия из 100%, чтобы получить процент занятости процессора. 
-  **Итог:** Получаем список ядер с текущим процентом их загрузки (например, `{cpu="0"} 15.5, {cpu="1"} 20.2)`.
+1. `node_cpu_seconds_total{mode="idle"}`: выбираем метрику времени, которое процессор провел в режиме бездействия (idle).
+2. `rate(...[1m])`: вычисляем среднюю скорость изменения метрики за последнюю 1 минуту. Доля времени бездействия (от 0 до 1).
+3. `avg by (cpu) (...)`: агрегируем данные, высчитывая среднее значение в разрезе каждого ядра (label cpu).
+4. `* 100`: переводим долю в проценты.
+5. `100 - ...`: вычитаем процент бездействия из 100%, чтобы получить процент занятости процессора.
+   **Итог:** Получаем список ядер с текущим процентом их загрузки (например, `{cpu="0"} 15.5, {cpu="1"} 20.2)`.
 
 </details>
 
 2.  **Настройки (справа):**
     *   `Panel options` -> `Title`: **Загрузка ЦПУ**
-    *   `Standard options` -> `Unit`: **Percent (0-100)**
+    *   `Standard options` -> `Unit`: **Misc / Percent (0-100)**
 3.  **`Save dashboard`**.
 4.  Называем дашборд **System Monitoring** и нажимаем **`Save`**.
 
@@ -236,7 +237,7 @@ sudo systemctl status grafana-server
 
 3.  **Настройки (справа):**
     *   `Panel options` -> `Title`: **Доступная память**
-    *   `Standard options` -> `Unit`: **Data (IEC) -> bytes(IEC)**
+    *   `Standard options` -> `Unit`: **Data -> bytes(IEC)**
 4.  **`Save dashboard`**.
 
 ---
@@ -258,7 +259,7 @@ sudo systemctl status grafana-server
 
 3.  **Настройки (справа):**
     *   `Panel options` -> `Title`: **Свободное место на диске (/)**
-    *   `Standard options` -> `Unit`: **Data (IEC) -> bytes(IEC)**
+    *   `Standard options` -> `Unit`: **Data -> bytes(IEC)**
 4.   **`Save dashboard`**.
 
 ---
@@ -276,8 +277,8 @@ sudo systemctl status grafana-server
         ```
 3.  **Настройки (справа):**
     *   `Panel options` -> `Title`: **Операции I/O на диске**
-    *   `Standard options` -> `Unit`: **Throughput -> Operations/sec (ops)**
-    *   В секции `Legend`. В поле `Values` выбираем `Last (not null)`.
+    *   `Standard options` -> `Unit`: **Throughput -> ops/sec (ops)**
+    *   В секции `Legend`. В поле `Values` выбираем `Last* (non-null value)`.
 4.  **`Save dashboard`** -> **`Save`**.
 
 <details>
