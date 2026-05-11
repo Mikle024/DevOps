@@ -88,7 +88,7 @@ cleanup_by_datetime() {
 cleanup_by_mask() {
   echo "Starting cleanup by name mask..." >&2
   echo "Enter a name mask for files and folders." >&2
-  echo "Hint: to find script-generated files, use a mask like 'azzzzz_*_141125*'" >&2
+  echo "Hint: to find script-generated files, use a mask like 'symbols*_date*'" >&2
   read -r name_mask < /dev/tty
 
   if [ -z "$name_mask" ]; then
