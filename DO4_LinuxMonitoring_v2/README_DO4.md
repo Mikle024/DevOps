@@ -15,10 +15,10 @@
 3. [Очистка файловой системы](#part-3-очистка-файловой-системы)
 4. [Генератор логов](#part-4-генератор-логов)
 5. [Мониторинг](#part-5-мониторинг)
-6. [**GoAccess**](#part-5-goAccess)
-7. [**Prometheus** и **Grafana**](#part-5-prometheus-и-grafana)
-8. [Готовый дашборд](#part-5-готовый-дашборд)
-9. [Свой **node_exporter**](#part-5-свой-node_exporter)
+6. [**GoAccess**](#part-6-goAccess)
+7. [**Prometheus** и **Grafana**](#part-7-prometheus-и-grafana)
+8. [Готовый дашборд](#part-8-готовый-дашборд)
+9. [Свой **node_exporter**](#part-9-свой-node_exporter)
 
 ---
 
