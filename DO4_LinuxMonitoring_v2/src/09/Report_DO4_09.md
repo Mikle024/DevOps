@@ -39,7 +39,7 @@ server {
 
 
 <details>
-  <summary> Создал и настроил дашборд **grafana**, добавив выборки метрик:</summary>
+  <summary> Создал и настроил дашборд grafana, добавив выборки метрик:</summary>
 
 #### Title: Загрузка ЦПУ
 
