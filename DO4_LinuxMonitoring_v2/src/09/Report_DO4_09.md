@@ -5,7 +5,7 @@
 
 >  Указываем в `/etc/nginx/sites-available/default` отдавать `metrics.html` в формате **Plain Text**:
 >
-> ![screen_9_01.png](screen/screen_9_01.png)
+> <img src="screen/screen_9_01.png" width="50%" />
 >
 
 ```nginx
