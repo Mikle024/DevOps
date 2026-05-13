@@ -7,14 +7,14 @@
 
 ![devops.png](materials/images/devops.png)
 
-| **Project**                       | **Status**      |
-|------------------------------------|-----------------|
-| `DO1` [Linux](DO1_Linux)           | 200 XP, 100%    |
-| `DO2` [LinuxNetwork](DO2_LinuxNetwork) | 490 XP, 140%    |
-| `DO3` [LinuxMonitoring_v1](DO3_LinuxMonitoring_v1) | 350 XP, 100%    |
-| `DO4` [LinuxMonitoring_v2](DO4_LinuxMonitoring_v2) | In progress     |
-| `DO5` [SimpleDocker](DO5_SimpleDocker) | 200 XP, 100%    |
-| `DO6` [CICD](DO6_CICD)             | 268 XP, 134%    |
+| **Project**                       | **Status**   |
+|------------------------------------|--------------|
+| `DO1` [Linux](DO1_Linux)           | 200 XP, 100% |
+| `DO2` [LinuxNetwork](DO2_LinuxNetwork) | 490 XP, 140% |
+| `DO3` [LinuxMonitoring_v1](DO3_LinuxMonitoring_v1) | 350 XP, 100% |
+| `DO4` [LinuxMonitoring_v2](DO4_LinuxMonitoring_v2) | 501 XP, 143% |
+| `DO5` [SimpleDocker](DO5_SimpleDocker) | 200 XP, 100% |
+| `DO6` [CICD](DO6_CICD)             | 268 XP, 134% |
 
 ## Overview of Projects
 
@@ -56,10 +56,18 @@
 
 ---
 
-### `DO4_LinuxMonitoring_v2`
-Расширение функционала `LinuxMonitoring_v1` (in progress).
-
-// [Подробнее](DO4_LinuxMonitoring_v2/README_DO4.md) //
+### [DO4_LinuxMonitoring_v2](DO4_LinuxMonitoring_v2) - Мониторинг и анализ логов
+Расширение функционала `LinuxMonitoring_v1`.
+Разработка **Bash**-скриптов и инструментов для генерации файлов, анализа логов и мониторинга системных ресурсов.
+**Решенные задачи:**
+- **Генерация файловой структуры:** Автоматическое создание директорий и файлов с заданными параметрами, контроль свободного места и ведение логов созданных объектов.
+- **Работа с файловой системой:** Реализация скриптов для массового заполнения файловой системы и последующей очистки по логам, времени создания или маске имени.
+- **Генерация и анализ логов:** Создание **nginx-логов** в формате **combined**, обработка логов через **awk**, фильтрация запросов и анализ **HTTP-кодов** ответов.
+- **Мониторинг системы:** Настройка и использование **GoAccess**, **Prometheus** и **Grafana** для визуализации и анализа системных метрик.
+- **Нагрузочное тестирование:** Проверка поведения системы под нагрузкой с использованием **stress** и **iperf3**.
+- **Экспорт метрик:** Разработка собственного **node_exporter** для передачи базовых системных метрик в формате **Prometheus**.
+- 
+[Подробнее](DO4_LinuxMonitoring_v2/README_DO4.md)
 
 ---
 
